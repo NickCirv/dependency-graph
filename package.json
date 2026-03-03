@@ -1,0 +1,33 @@
+{
+  "name": "dependency-graph",
+  "version": "1.0.0",
+  "description": "Visualize npm dependency trees as ASCII/Unicode graphs. Detect circular deps and version conflicts. Zero dependencies.",
+  "type": "module",
+  "bin": {
+    "dependency-graph": "./index.js",
+    "dep-graph": "./index.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "developer-tools",
+    "cli",
+    "nodejs",
+    "zero-dependencies",
+    "npm",
+    "dependencies",
+    "dependency-tree",
+    "package-management",
+    "visualization"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NickCirv/dependency-graph"
+  },
+  "homepage": "https://github.com/NickCirv/dependency-graph#readme",
+  "bugs": {
+    "url": "https://github.com/NickCirv/dependency-graph/issues"
+  }
+}
