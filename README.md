@@ -1,3 +1,5 @@
+![Banner](banner.svg)
+
 # dependency-graph
 
 Visualize npm dependency trees as ASCII/Unicode graphs. Detect circular dependencies and version conflicts. **Zero external dependencies** — built-in Node.js modules only.
