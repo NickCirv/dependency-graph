@@ -1,156 +1,50 @@
-![Banner](banner.svg)
+<div align="center">
 
 # dependency-graph
 
-Visualize npm dependency trees as ASCII/Unicode graphs. Detect circular dependencies and version conflicts. **Zero external dependencies** — built-in Node.js modules only.
+**Render npm dependency trees in your terminal — circular deps, version conflicts, and stats in one command.**
 
-```
-agent-viewer@1.0.0
-├── express@4.22.1
-│   ├── accepts@1.3.8
-│   │   ├── mime-types@2.1.35
-│   │   └── negotiator@0.6.3
-│   ├── body-parser@1.20.4
-│   │   ├── bytes@3.1.2
-│   │   └── raw-body@2.5.2
-│   └── serve-static@1.16.2
-│       └── send@0.19.0
-├── socket.io@4.8.1
-│   ├── socket.io-adapter@2.5.5
-│   └── socket.io-parser@4.2.4
-└── better-sqlite3@12.6.2
-    └── prebuild-install@7.1.3
+[![License: MIT](https://img.shields.io/badge/License-MIT-0B0A09?style=flat-square&logo=opensourceinitiative&logoColor=white)](LICENSE)
+[![Zero Dependencies](https://img.shields.io/badge/dependencies-0-brightgreen?style=flat-square&labelColor=0B0A09)](package.json)
+[![Node](https://img.shields.io/badge/node-%3E%3D18-0B0A09?style=flat-square&logo=node.js&logoColor=white)](package.json)
 
-  3 direct · 41 transitive · 44 total (depth ≤3)
-```
+</div>
 
 ## Install
 
 ```bash
-npm install -g dependency-graph
-```
-
-Or run without installing:
-
-```bash
-npx dependency-graph
+npx github:NickCirv/dependency-graph
 ```
 
 ## Usage
 
 ```bash
-# Show current project dependency tree
+# Show dependency tree for the current project
 dep-graph
-
-# Show deps of a specific package
-dep-graph express
-
-# Limit tree depth (default: 3)
-dep-graph --depth 5
-
-# Production dependencies only
-dep-graph --prod
-
-# Dev dependencies only
-dep-graph --dev
-
-# Why is a package installed? Show all dependents
-dep-graph --why lodash
 
 # Detect circular dependencies
 dep-graph --circular
 
-# Show dependency statistics
+# Show dependency statistics (counts, conflicts, node_modules size)
 dep-graph --stats
-
-# Flat sorted list with versions
-dep-graph --flat
-
-# JSON output (works with any flag)
-dep-graph --json
-dep-graph --stats --json
-
-# Use from a different directory
-dep-graph --cwd /path/to/project
 ```
 
-## Features
+| Flag | Description |
+|------|-------------|
+| `--depth <n>` | Limit tree depth (default: 3) |
+| `--prod` | Production dependencies only |
+| `--dev` | Dev dependencies only |
+| `--why <pkg>` | Show all dependency chains that pull in a package |
+| `--circular` | Detect circular dependency cycles |
+| `--stats` | Total count, direct vs transitive, conflicts, disk size |
+| `--flat` | Flat alphabetical list with resolved versions |
+| `--json` | Machine-readable JSON output (works with any flag) |
+| `--cwd <path>` | Run against a different directory |
 
-- **ASCII/Unicode tree** — uses `├──`, `└──`, `│` box-drawing chars for clean output
-- **Color coding** — blue=direct deps, white=transitive, yellow=duplicate versions, red=circular
-- **Circular detection** — `--circular` finds and reports all dependency cycles
-- **Version conflicts** — highlights same package required at different versions
-- **`--why`** — trace all dependency chains that pull in a package
-- **`--stats`** — total count, direct vs transitive, duplicates, node_modules size
-- **`--flat`** — alphabetically sorted list of all resolved packages with versions
-- **`--json`** — machine-readable output for any mode
-- **Graceful fallback** — works without node_modules, reads from package.json
-- **Zero dependencies** — uses only Node.js built-ins (fs, path, os)
+## What it does
 
-## Output Modes
+Reads `package.json` and `node_modules` to build a dependency tree, then renders it with Unicode box-drawing characters and ANSI color coding: blue for direct deps, yellow for version conflicts, and red for circular references. Works without `node_modules` too — falls back to declared ranges from `package.json`. Zero runtime dependencies; uses only Node.js built-ins.
 
-### Tree (default)
+---
 
-```
-my-app@2.1.0
-├── express@4.22.1
-│   ├── accepts@1.3.8
-│   └── body-parser@1.20.4
-└── lodash@4.17.21 [duplicate]
-```
-
-### Stats (`--stats`)
-
-```
-my-app@2.1.0 — Dependency Statistics
-
-  Direct deps:       12
-  Transitive deps:   142
-  Total unique:      154
-  Version conflicts: 2
-    lodash: 4.17.21, 4.17.11
-  node_modules size: 166.8 MB
-```
-
-### Why (`--why express`)
-
-```
-Why is "express" installed?
-Installed version: 4.22.1
-
-  (root) → express
-  (root) → @my/package → express
-```
-
-### Circular (`--circular`)
-
-```
-Circular Dependency Detection
-
-Found 1 circular dependency chain(s):
-
-  1. module-a → module-b → module-c → module-a
-```
-
-### Flat (`--flat`)
-
-```
-my-app@2.1.0 — All Dependencies (flat)
-
-  accepts@1.3.8
-  body-parser@1.20.4
-  bytes@3.1.2
-  express@4.22.1
-  ...
-
-  Total: 154 packages
-```
-
-## Requirements
-
-- Node.js >= 18
-- No npm install needed — zero runtime dependencies
-
-## License
-
-MIT
+<sub>Zero dependencies · Node ≥18 · MIT · by <a href="https://github.com/NickCirv">NickCirv</a></sub>
