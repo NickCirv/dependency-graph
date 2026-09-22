@@ -1,50 +1,64 @@
-<div align="center">
+![Nicholas Ashkar — dependency-graph](assets/nicholas-ashkar/banner.png)
 
 # dependency-graph
 
-**Render npm dependency trees in your terminal — circular deps, version conflicts, and stats in one command.**
+Explores an npm project's installed dependency tree and version relationships.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-0B0A09?style=flat-square&logo=opensourceinitiative&logoColor=white)](LICENSE)
-[![Zero Dependencies](https://img.shields.io/badge/dependencies-0-brightgreen?style=flat-square&labelColor=0B0A09)](package.json)
-[![Node](https://img.shields.io/badge/node-%3E%3D18-0B0A09?style=flat-square&logo=node.js&logoColor=white)](package.json)
 
-</div>
 
-## Install
 
-```bash
-npx github:NickCirv/dependency-graph
-```
+<a id="usage"></a>
 
-## Usage
+<a id="show-dependency-tree-for-the-current-project"></a>
 
-```bash
-# Show dependency tree for the current project
-dep-graph
-
-# Detect circular dependencies
-dep-graph --circular
-
-# Show dependency statistics (counts, conflicts, node_modules size)
-dep-graph --stats
-```
-
-| Flag | Description |
-|------|-------------|
-| `--depth <n>` | Limit tree depth (default: 3) |
-| `--prod` | Production dependencies only |
-| `--dev` | Dev dependencies only |
-| `--why <pkg>` | Show all dependency chains that pull in a package |
-| `--circular` | Detect circular dependency cycles |
-| `--stats` | Total count, direct vs transitive, conflicts, disk size |
-| `--flat` | Flat alphabetical list with resolved versions |
-| `--json` | Machine-readable JSON output (works with any flag) |
-| `--cwd <path>` | Run against a different directory |
+<a id="show-dependency-statistics-counts-conflicts-node_modules-size"></a>
 
 ## What it does
 
-Reads `package.json` and `node_modules` to build a dependency tree, then renders it with Unicode box-drawing characters and ANSI color coding: blue for direct deps, yellow for version conflicts, and red for circular references. Works without `node_modules` too — falls back to declared ranges from `package.json`. Zero runtime dependencies; uses only Node.js built-ins.
+- Dependency-tree traversal.
+- Version conflicts and cycles.
+- Reverse dependents.
+- Flat lists and package-size statistics.
 
----
 
-<sub>Zero dependencies · Node ≥18 · MIT · by <a href="https://github.com/NickCirv">NickCirv</a></sub>
+<a id="install"></a>
+
+## Quickstart
+
+Prerequisites: Node.js `>=20` and npm. The checkout below pins the source used for this documentation.
+
+```sh
+git clone https://github.com/NickCirv/dependency-graph.git
+cd dependency-graph
+git checkout 74081788dcb1eb4e8f73c4b5c5c66b823c3e32e1
+node index.js --json
+```
+
+**Expected behavior (illustrative, not captured):** Prints a dependency view from the current project and available installed package metadata.
+
+Examples are source-inspected, **not runtime-tested**. See the research record for verification gaps.
+
+## Boundaries and data
+
+Results depend on the lockfile and node_modules state. Missing installations limit transitive detail. Its dep-graph executable alias overlaps with a separate source-import tool.
+
+
+<a id="detect-circular-dependencies"></a>
+
+## Development
+
+The manifest defines `npm test` as:
+
+```sh
+node --test
+```
+
+The captured suite is a smoke check, not end-to-end behavior coverage. Examples include “entry is valid JavaScript”. Tests were not run for this documentation revision.
+
+See [implementation and command reference](docs/REFERENCE.md) for the package scripts and inspected interfaces, and [research record](docs/RESEARCH.md) for the pinned source, document decisions and unresolved checks.
+
+## License and contact
+
+See [LICENSE](LICENSE) for the original terms and attribution. Legal text is unchanged.
+
+[Nicholas Ashkar](https://nicholashkar.com/) · [Discuss a project](https://nicholashkar.com/#oxblood-contact)
